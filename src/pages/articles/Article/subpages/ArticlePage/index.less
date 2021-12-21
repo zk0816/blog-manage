@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  height: 63px;
+}
+
+:global(.bytemd) {
+  height: calc(100vh - 150px);
+}
+
+//隐藏全屏图标 暂不支持
+:global(.bytemd-toolbar-right) {
+  :nth-child(5) {
+    display: none;
+  }
+}
+
+:global(.ant-radio-button-checked) {
+  color: #1d7dfa;
+  background-color: #e8f3ff;
+}
