@@ -10,11 +10,11 @@ export interface Current {
 }
 
 export interface Categorty {
-  categoryId: number;
-  categoryName: string;
+  categoryId?: number;
+  categoryName?: string;
 }
 
 export interface Tag {
-  tagId: number;
-  tagName: string;
+  tagId?: number;
+  tagName?: string;
 }

@@ -48,3 +48,8 @@ export function getCategory(): P<Categorty[]> {
 export function getTag(): P<Tag[]> {
   return request.get(`/tag/list`);
 }
+
+/** 实时保存草稿箱*/
+export function saveDraft(params: any) {
+  return request.post(`/draft/save`, { ...params });
+}

@@ -30,16 +30,12 @@ export default [
         path: '/articles',
         routes: [
           {
+            path: './categorytag',
+            component: './articles/CategoryTag',
+          },
+          {
             path: './manage',
             component: './articles/Article',
-          },
-          {
-            path: './category',
-            component: './articles/Category',
-          },
-          {
-            path: './tag',
-            component: './articles/Tag',
           },
           {
             path: './articlepage',
