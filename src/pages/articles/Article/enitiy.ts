@@ -1,5 +1,6 @@
 export interface Current {
   id?: number;
+  artid?: number;
   title: string;
   category?: Categorty;
   tag?: Tag[];

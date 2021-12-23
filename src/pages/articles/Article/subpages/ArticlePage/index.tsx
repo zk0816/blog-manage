@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { Editor } from '@bytemd/react';
 import gfm from '@bytemd/plugin-gfm';
 import 'bytemd/dist/index.min.css';
 import 'highlight.js/styles/vs.css';
 import highlight from '@bytemd/plugin-highlight-ssr';
-import { Button, Input, message } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import zhHans from 'bytemd/lib/locales/zh_Hans.json';
 import styles from './index.less';
 import Release from './components/Release';
@@ -23,9 +23,19 @@ const Store = createContext(ArticleStore);
 
 const ArticlePage: React.FC = observer(() => {
   const { current, setCurrent, setVisible, content, setContent } = useContext(Store);
+  const [form] = Form.useForm();
   const _current = toJS(current);
 
   const _test = useRef({});
+
+  useEffect(() => {
+    if (_current.title) {
+      _test.current = _current;
+      form.setFieldsValue({
+        title: _current.title,
+      });
+    }
+  }, [_current]);
 
   /**
    * 填写标题时候加入防抖写入草稿箱，
@@ -52,12 +62,16 @@ const ArticlePage: React.FC = observer(() => {
   return (
     <div className={styles.content}>
       <div className={styles.row} style={{ backgroundColor: 'white' }}>
-        <Input
-          placeholder="输入文章标题..."
-          size="large"
-          style={{ border: 'none', boxShadow: 'none' }}
-          onChange={(e: any) => onTitle(e.target.value)}
-        />
+        <Form form={form} style={{ flex: 1 }}>
+          <Form.Item name="title">
+            <Input
+              placeholder="输入文章标题..."
+              size="large"
+              style={{ border: 'none', boxShadow: 'none', height: 63 }}
+              onChange={(e: any) => onTitle(e.target.value)}
+            />
+          </Form.Item>
+        </Form>
         <div style={{ alignItems: 'center', display: 'flex' }}>
           <Button style={{ height: '32px', color: '#1890ff', borderColor: '#1890ff' }}>
             草稿箱

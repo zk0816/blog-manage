@@ -16,4 +16,5 @@ export const menuData: MenuItem[] = [
       { name: '文章管理', path: '/articles/manage' },
     ],
   },
+  { name: '草稿箱', path: '/draft' },
 ];

@@ -15,18 +15,26 @@ const Category: React.FC = () => {
     <div>
       <h1>分类</h1>
       <div style={{ display: 'flex' }}>
-        <Input placeholder="请输入新的分类..." onChange={(v: any) => setContent(v.target.value)} />
+        <Input
+          placeholder="请输入新的分类..."
+          value={content}
+          onChange={(v: any) => setContent(v.target.value)}
+        />
         <Button
           type="primary"
           style={{ marginLeft: 20 }}
           onClick={() => {
-            API.createCategory({ categoryName: content })
-              .then(() => {
-                message.success('新建成功');
-                setContent('');
-                setLoading(true);
-              })
-              .catch((e: any) => message.error(e.message));
+            if (content === '') {
+              message.warning('请输入新的分类');
+            } else {
+              API.createCategory({ categoryName: content })
+                .then(() => {
+                  message.success('新建成功');
+                  setContent('');
+                  setLoading(true);
+                })
+                .catch((e: any) => message.error(e.message));
+            }
           }}
         >
           新建

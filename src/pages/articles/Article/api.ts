@@ -6,7 +6,7 @@ type P<T> = http.PromiseResp<T>;
 type Page<T> = http.PromisePageResp<T>;
 
 export interface Params {
-  id?: number;
+  artid?: number;
   title: string;
   content?: string;
   categoryId: number;
@@ -31,7 +31,7 @@ export function updateArticle(params: Params) {
 }
 
 export interface DeleteParams {
-  id: number;
+  artid: number;
 }
 
 /** 删除文章*/

@@ -44,6 +44,10 @@ export default [
         ],
       },
       {
+        path: '/draft',
+        component: './Draft',
+      },
+      {
         component: './404',
       },
     ],

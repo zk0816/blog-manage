@@ -20,14 +20,13 @@ const Release: React.FC = () => {
   const { data: categorylist } = useInitial(API.getCategory, [], '');
   const { data: taglist } = useInitial(API.getTag, [], '');
 
-  console.log('ppp', _current, _content);
-
   useEffect(() => {
-    if (_current.id) {
+    if (_current.artid) {
       form.setFieldsValue({
         categoryId: _current.category && _current.category.categoryId,
         tagId:
           _current.tag &&
+          _current.tag.length > 0 &&
           _current.tag.map((e: any) => {
             return { label: e.tagName, value: e.tagId };
           }),
@@ -44,7 +43,7 @@ const Release: React.FC = () => {
     console.log('博客后台管理系统', value, 'dsdsds', _current);
     const params = {
       ...value,
-      id: _current.id,
+      artid: _current.artid,
       title: _current.title,
       content: _content,
       categoryId: value.categoryId,
