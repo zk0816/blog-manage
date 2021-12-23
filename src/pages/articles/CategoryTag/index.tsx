@@ -6,7 +6,7 @@ import Tag from '@/pages/articles/CategoryTag/components/Tag';
 
 const CategoryTag: React.FC = () => {
   return (
-    <PageHeaderWrapper title="文章管理">
+    <PageHeaderWrapper title="分类和标签管理">
       <div style={{ display: 'flex' }}>
         <Card style={{ flex: 1 }}>
           <Category />

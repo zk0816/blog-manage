@@ -12,7 +12,7 @@ export const menuData: MenuItem[] = [
   {
     name: '文章',
     children: [
-      { name: '分类和管理', path: '/articles/categorytag' },
+      { name: '分类和标签管理', path: '/articles/categorytag' },
       { name: '文章管理', path: '/articles/manage' },
     ],
   },

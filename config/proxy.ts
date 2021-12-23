@@ -19,7 +19,7 @@ export default {
   },
   test: {
     '/api': {
-      target: `http://192.168.0.140:9080`,
+      target: `http://localhost:9080`,
       changeOrigin: true,
       //pathRewrite: { '^/api': '' },
     },

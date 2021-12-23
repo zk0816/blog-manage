@@ -37,6 +37,7 @@ const Release: React.FC = () => {
     } else {
       form.resetFields();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [_current]);
 
   const onSumbit = (value: any) => {

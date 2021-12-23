@@ -10,12 +10,12 @@ export function getCategory(): P<Categorty[]> {
 }
 
 /** 新建分类*/
-export function createCategory(params: Categorty): P<Categorty[]> {
+export function createCategory(params: any): P<Categorty[]> {
   return request.post(`/category/add`, { ...params });
 }
 
 /** 删除分类*/
-export function deleteCategory(params: Categorty): P<Categorty[]> {
+export function deleteCategory(params: any): P<Categorty[]> {
   return request.post(`/category/delete`, { ...params });
 }
 
@@ -25,11 +25,11 @@ export function getTag(): P<Tag[]> {
 }
 
 /** 新建标签*/
-export function createTag(params: Tag): P<Tag[]> {
+export function createTag(params: any): P<Tag[]> {
   return request.post(`/tag/add`, { ...params });
 }
 
 /** 删除标签*/
-export function deleteTag(params: Tag): P<Tag[]> {
+export function deleteTag(params: any): P<Tag[]> {
   return request.post(`/tag/delete`, { ...params });
 }
