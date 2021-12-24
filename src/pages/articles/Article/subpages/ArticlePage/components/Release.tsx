@@ -8,6 +8,7 @@ import type { Categorty, Tag } from '../../../enitiy';
 import useInitial from '@/hooks/useInitail';
 import { PlusOutlined } from '@ant-design/icons';
 import type { UploadFile } from 'antd/lib/upload/interface';
+import COS from '@/utils/COS';
 
 const Store = createContext(ArticleStore);
 
@@ -50,13 +51,13 @@ const Release: React.FC = () => {
       tagId: value.tagId.map((e: any) => e.value),
     };
     console.log('ppp', params);
-    API.createArticle(params)
-      .then(() => {
-        message.success('发布成功');
-        setVisible(false);
-        history.back();
-      })
-      .catch((e: any) => message.error(e.message));
+    // API.createArticle(params)
+    //   .then(() => {
+    //     message.success('发布成功');
+    //     setVisible(false);
+    //     history.back();
+    //   })
+    //   .catch((e: any) => message.error(e.message));
   };
 
   const beforeUpload = (file: UploadFile) => {
@@ -172,10 +173,11 @@ const Release: React.FC = () => {
             )}
           </Upload> */}
           <Upload
-            name="file"
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            accept="image/*"
             listType="picture-card"
+            showUploadList={{
+              showRemoveIcon: true,
+            }}
+            customRequest={(data: any) => COS.cosUpload(data, `conver_${data.file.name}`)}
             beforeUpload={beforeUpload}
             onPreview={onPreview}
             maxCount={1}

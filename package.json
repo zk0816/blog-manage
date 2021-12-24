@@ -60,6 +60,7 @@
     "axios": "^0.24.0",
     "bytemd": "^1.10.13",
     "classnames": "^2.2.6",
+    "cos-js-sdk-v5": "0.5.26",
     "lodash": "^4.17.21",
     "mobx": "^6.3.9",
     "mobx-react-lite": "^3.2.2",
