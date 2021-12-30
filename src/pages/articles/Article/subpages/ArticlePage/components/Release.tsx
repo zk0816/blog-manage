@@ -51,13 +51,13 @@ const Release: React.FC = () => {
       tagId: value.tagId.map((e: any) => e.value),
     };
     console.log('ppp', params);
-    // API.createArticle(params)
-    //   .then(() => {
-    //     message.success('发布成功');
-    //     setVisible(false);
-    //     history.back();
-    //   })
-    //   .catch((e: any) => message.error(e.message));
+    API.createArticle(params)
+      .then(() => {
+        message.success('发布成功');
+        setVisible(false);
+        history.back();
+      })
+      .catch((e: any) => message.error(e.message));
   };
 
   const beforeUpload = (file: UploadFile) => {

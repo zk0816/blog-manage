@@ -93,7 +93,7 @@ const Article: React.FC = observer(() => {
             写文章
           </Button>
         </div>
-        <Table dataSource={list} rowKey="id" pagination={paginationConfig}>
+        <Table dataSource={list} rowKey="artid" pagination={paginationConfig}>
           <Column title="标题" dataIndex="title" align="center" width="30%" />
           <Column
             title="发布时间"
