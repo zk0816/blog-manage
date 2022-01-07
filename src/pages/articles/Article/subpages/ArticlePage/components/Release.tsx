@@ -32,7 +32,17 @@ const Release: React.FC = () => {
             return { label: e.tagName, value: e.tagId };
           }),
         thumb_url: _current.thumb_url,
-        cover_url: _current.cover_url,
+        cover_url:
+          _current.cover_url?.length !== 0
+            ? [
+                {
+                  response: { data: _current.cover_url },
+                  url: _current.cover_url,
+                  name: '头像',
+                  status: 'done',
+                },
+              ]
+            : [],
       });
     } else {
       form.resetFields();
@@ -41,7 +51,7 @@ const Release: React.FC = () => {
   }, [_current]);
 
   const onSumbit = (value: any) => {
-    console.log('博客后台管理系统', value, 'dsdsds', _current);
+    console.log('博客后台管理系统', value);
     const params = {
       ...value,
       artid: _current.artid,
@@ -49,8 +59,9 @@ const Release: React.FC = () => {
       content: _content,
       categoryId: value.categoryId,
       tagId: value.tagId.map((e: any) => e.value),
+      cover_url:
+        value.cover_url && value.cover_url.length > 0 ? value.cover_url[0].response.data : '',
     };
-    console.log('ppp', params);
     API.createArticle(params)
       .then(() => {
         message.success('发布成功');
@@ -88,8 +99,10 @@ const Release: React.FC = () => {
     // @ts-ignore
     imgWindow.document.write(image.outerHTML);
   };
+
   return (
     <Modal
+      forceRender
       title={
         <span
           style={{
@@ -133,8 +146,14 @@ const Release: React.FC = () => {
             ))}
           </Radio.Group>
         </Form.Item>
-        <Form.Item name="tagId" label="标签" rules={[{ required: true }]}>
+        <Form.Item
+          name="tagId"
+          label="标签"
+          rules={[{ required: true }]}
+          getValueFromEvent={(value) => value.slice(0, 3)} // 限制最大标签数
+        >
           <Select
+            allowClear
             labelInValue
             placeholder="请选择标签"
             //onPopupScroll={(e) => onLoad(e)}
@@ -147,7 +166,7 @@ const Release: React.FC = () => {
             style={{ width: 380 }}
           >
             {taglist.map((item: Tag) => (
-              <Select.Option value={item.tagId} key={item.tagId}>
+              <Select.Option value={item.tagId} key={item.tagId} disabled={item.selected}>
                 {item.tagName}
               </Select.Option>
             ))}
@@ -156,27 +175,29 @@ const Release: React.FC = () => {
         <Form.Item name="thumb_url" label="文章链接">
           <Input style={{ width: 380 }} />
         </Form.Item>
-        <Form.Item name="cover_url" label="封面">
-          {/* <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={this.handleChange}
-          >
-            {imageUrl ? (
-              <img src={imageUrl} alt="avatar" style={{ width: '100%' }} />
-            ) : (
-              uploadButton
-            )}
-          </Upload> */}
+        <Form.Item
+          name="cover_url"
+          label="封面"
+          valuePropName="fileList"
+          getValueFromEvent={(e) => {
+            if (Array.isArray(e)) {
+              return e.slice(-1);
+            }
+            if (!e.file.status) return [];
+            if (e.file.status == 'error') {
+              message.error('头像上传出错，请重新上传');
+              return [];
+            }
+            return e && e.fileList.slice(-1);
+          }}
+        >
           <Upload
+            name="file"
             listType="picture-card"
             showUploadList={{
               showRemoveIcon: true,
             }}
+            accept="image/*"
             customRequest={(data: any) => COS.cosUpload(data, `conver_${data.file.name}`)}
             beforeUpload={beforeUpload}
             onPreview={onPreview}
