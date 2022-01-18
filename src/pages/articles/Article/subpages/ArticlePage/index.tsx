@@ -1,22 +1,43 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { Editor } from '@bytemd/react';
-import gfm from '@bytemd/plugin-gfm';
-import 'bytemd/dist/index.min.css';
-import 'highlight.js/styles/vs.css';
-import highlight from '@bytemd/plugin-highlight-ssr';
 import { Button, Form, Input, message } from 'antd';
-import zhHans from 'bytemd/lib/locales/zh_Hans.json';
-import styles from './index.less';
 import Release from './components/Release';
 import { observer } from 'mobx-react-lite';
 import ArticleStore from '@/store/Article';
 import { toJS } from 'mobx';
 import * as API from '../../api';
 import _ from 'lodash';
+import gfm from '@bytemd/plugin-gfm';
+import highlightssr from '@bytemd/plugin-highlight-ssr';
+import highlight from '@bytemd/plugin-highlight';
+import breaks from '@bytemd/plugin-breaks';
+import footnotes from '@bytemd/plugin-footnotes';
+import frontmatter from '@bytemd/plugin-frontmatter';
+import gemoji from '@bytemd/plugin-gemoji';
+import math from '@bytemd/plugin-math';
+import mermaid from '@bytemd/plugin-mermaid';
+import mediumZoom from '@bytemd/plugin-medium-zoom';
+import zhHans from 'bytemd/lib/locales/zh_Hans.json';
+import mermaid_zhHans from '@bytemd/plugin-mermaid/lib/locales/zh_Hans.json';
+import math_zhHans from '@bytemd/plugin-math/lib/locales/zh_Hans.json';
+import gfm_zhHans from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json';
+
+import 'bytemd/dist/index.min.css';
+import 'juejin-markdown-themes/dist/channing-cyan.min.css';
+import 'highlight.js/styles/a11y-dark.css';
+import styles from './index.less';
 
 const plugins = [
-  gfm(),
+  breaks(),
+  footnotes(),
+  frontmatter(),
+  gemoji(),
+  gfm({ locale: gfm_zhHans }),
   highlight(),
+  highlightssr(),
+  math({ locale: math_zhHans }),
+  mermaid({ locale: mermaid_zhHans }),
+  mediumZoom(),
   // Add more plugins here
 ];
 const Store = createContext(ArticleStore);

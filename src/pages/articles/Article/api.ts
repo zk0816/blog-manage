@@ -36,7 +36,7 @@ export interface DeleteParams {
 
 /** 删除文章*/
 export function deleteArticle(params: DeleteParams) {
-  return request.post(`/article/delete`, { params });
+  return request.post(`/article/delete`, { ...params });
 }
 
 /** 查询分类*/
