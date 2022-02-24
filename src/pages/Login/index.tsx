@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ProFormText, LoginForm } from '@ant-design/pro-form';
 import { useIntl, history, FormattedMessage } from 'umi';
 import { loginApi } from '@/common/api';
+import logo from '@/assets/logo.svg';
 
 import styles from './index.less';
 
@@ -62,7 +63,7 @@ const Login: React.FC = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
+          logo={<img alt="logo" src={logo} />}
           title="小康博客后台管理系统"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{

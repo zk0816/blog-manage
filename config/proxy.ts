@@ -24,9 +24,9 @@ export default {
       //pathRewrite: { '^/api': '' },
     },
   },
-  pre: {
+  pro: {
     '/api/': {
-      target: 'http://localhost:9080',
+      target: 'http://xiaokangapi.xyz',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },

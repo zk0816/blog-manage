@@ -53,17 +53,23 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  base: '/',
   history: {
     type: 'hash',
   },
   // Fast Refresh 热更新
   fastRefresh: {},
-  nodeModulesTransform: {
-    type: process.env.NODE_ENV == 'development' ? 'none' : 'all',
-    exclude: [],
-  },
+  nodeModulesTransform: { type: 'none' },
+  // nodeModulesTransform: {
+  //   type: process.env.NODE_ENV == 'development' ? 'none' : 'all',
+  //   exclude: [],
+  // },
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  publicPath: './',
+  // extraBabelIncludes: ['@babel/runtime'],
+  // presets: ['@babel/runtime'],
+  // alias: {
+  //   '@babel/runtime': '../node_modules/@babel/runtime',
+  // },
 });
