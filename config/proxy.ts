@@ -26,7 +26,7 @@ export default {
   },
   pro: {
     '/api/': {
-      target: 'http://xiaokangapi.xyz',
+      target: 'http://81.68.218.75:3000',
       changeOrigin: true,
       pathRewrite: { '^': '' },
     },
